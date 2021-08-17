@@ -10,13 +10,12 @@ import {
 } from 'node-rdkafka';
 import {ConsumerTopicConfig, ProducerTopicConfig} from 'node-rdkafka/config';
 import {Subject} from 'rxjs';
-import {Inject} from 'typescript-ioc';
 
 import {KafkaApi, MessageConsumer, MessageConsumerImpl, MessageProducer, MessageProducerImpl} from './kafka.api';
 import {KafkaGlobalConfig} from '../../config';
 
 export class KafkaService implements KafkaApi {
-    constructor(@Inject private opts: KafkaGlobalConfig) {}
+    constructor(private opts: KafkaGlobalConfig) {}
 
     async buildProducer(topicName: string, partition: NumberNullUndefined): Promise<MessageProducer> {
         // Create Kafka producer
