@@ -23,7 +23,6 @@ jobs:
       - name: Verify
         run: |
           npm install
-          npm test
           npm run build
 
   release:
