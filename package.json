@@ -9,6 +9,15 @@
   "bin": {
     "kafka-client": "dist/lib/index.js"
   },
+  "pkg": {
+    "scripts": "dist/lib/index.js",
+    "assets": "dist/**/*",
+    "targets": [
+      "node12-linux-x64",
+      "node12-macos-x64",
+      "node12-alpine-x64"
+    ]
+  },
   "dependencies": {
     "babel-jest": "^27.0.6",
     "fs-extra": "^10.0.0",
