@@ -5,7 +5,7 @@
   "main": "dist/kafka-client.umd.js",
   "module": "dist/kafka-client.es5.js",
   "typings": "dist/types/kafka-client.d.ts",
-  "type": "module",
+  "type": "commonjs",
   "bin": {
     "kafka-client": "dist/lib/index.js"
   },
