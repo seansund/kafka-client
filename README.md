@@ -2,24 +2,14 @@
 
 Command-line client to publish and consume messages from a Kafka topic.
 
-## Setup
+## Usage
 
-### Building the cli
-
-**Note:** These steps assume NodeJS >= v12 has been installed. If not, look at prerequisites below.
-
-1. Clone the repository
+### Clone the repository
    
-    ```shell
-    git clone https://github.com/seansund/kafka-client
-    ```
-   
-2. Install the dependencies
-
-    ```shell
-    cd kafka-client
-    npm install
-    ```
+```shell
+git clone https://github.com/seansund/kafka-client
+cd kafka-client
+```
 
 ### Getting the Event Stream credentials
 
@@ -47,20 +37,38 @@ Currently, the cli assumes you will be connecting to an IBM Cloud managed instan
    
     where: `SERVICE_NAME` is the name of the Event Streams service instance
 
-## Usage
+### Running the cli from a docker image
 
-The client is run using the `kafka-client` script in the root of the repository. E.g.
+#### Starting the consumer
 
 ```shell
-./kafka-client COMMAND -c ./kafka-config.json -t TOPIC
+./docker-kafka-client consume -c /config/kafka-config.json -t OutboundTranslatedMessage
 ```
 
-where:
-- `COMMAND` is one of two available commands: `consume` or `publish`
-- `kafka-config.json` is the file containing the credentials for the Event Streams instance
-- `TOPIC` is the topic that will be used to either publish events or consume events
+#### Starting the publisher
 
-### Publish
+```shell
+./docker-kafka-client publish -c /config/kafka-config.json -t inboundUntranslatedMessage
+```
+
+## Running the cli locally
+
+### Build the cli
+
+```shell
+npm install
+```
+
+### Run the consumer
+
+This command connects to a topic and consumes messages as they arrive, printing the message contents to the console. Press Ctrl-C to close the connection to the Kafka instance and return to the terminal.
+
+
+```shell
+./kafka-client consume -c ./kafka-config.json -t my-topic
+```
+
+### Run the publisher
 
 This command publishes events to the provided topic. Once the connection is established with the Kafka instance, you will be prompted for
 a message to put to the topic. Press Ctrl-C to exit the prompt. Alternatively, you can provide a message at the end of the publish command to send one message and complete the command.
@@ -72,15 +80,6 @@ a message to put to the topic. Press Ctrl-C to exit the prompt. Alternatively, y
 
 ```shell
 ./kafka-client publish -c ./kafka-config.json -t my-topic "single message"
-```
-
-### Consume
-
-This command connects to a topic and consumes messages as they arrive, printing the message contents to the console. Press Ctrl-C to close the connection to the Kafka instance and return to the terminal.
-
-
-```shell
-./kafka-client consume -c ./kafka-config.json -t my-topic
 ```
 
 ## Prerequisites
